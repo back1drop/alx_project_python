@@ -12,5 +12,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-token-auth/', obtain_auth_token),
-    path('', include('reviews.urls')),  # Include reviews app URLs
+    path('', include('reviews.urls')),  
 ]
