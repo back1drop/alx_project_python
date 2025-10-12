@@ -1,15 +1,15 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import ReviewViewSet, UserViewSet, MovieReviewsView, ReviewSearchView
-from django.contrib.auth.views import LoginView, LogoutView
-router = DefaultRouter()
-router.register(r'reviews', ReviewViewSet)
-router.register(r'users', UserViewSet)
+from django.urls import path
+from .views import (
+    register, login_view, logout_view, review_list, 
+    create_review, update_review, delete_review
+)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('movies/<str:movie_title>/reviews/', MovieReviewsView.as_view(), name='movie-reviews'),
-    path('search/', ReviewSearchView.as_view(), name='review-search'),
-    path('api/login/', LoginView.as_view(), name='login'), 
-    path('api/logout/', LogoutView.as_view(), name='logout'),
+    path('register/', register, name='register'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('reviews/', review_list, name='review_list'),
+    path('reviews/create/', create_review, name='create_review'),
+    path('reviews/<int:pk>/update/', update_review, name='update_review'),
+    path('reviews/<int:pk>/delete/', delete_review, name='delete_review'),
 ]

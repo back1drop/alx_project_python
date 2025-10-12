@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Movie Reviews</h2>
+<!-- Filter Form -->
+<form method="get">
+    <input type="text" name="movie_title" placeholder="Search by movie title" value="{{ request.GET.movie_title }}">
+    <select name="rating">
+        <option value="">All Ratings</option>
+        {% for i in "12345" %}
+            <option value="{{ i }}" {% if request.GET.rating == i %}selected{% endif %}>{{ i }}</option>
+        {% endfor %}
+    </select>
+    <select name="sort_by">
+        <option value="-created_date" {% if request.GET.sort_by == '-created_date' %}selected{% endif %}>Newest First</option>
+        <option value="created_date" {% if request.GET.sort_by == 'created_date' %}selected{% endif %}>Oldest First</option>
+        <option value="rating" {% if request.GET.sort_by == 'rating' %}selected{% endif %}>Rating (Low to High)</option>
+        <option value="-rating" {% if request.GET.sort_by == '-rating' %}selected{% endif %}>Rating (High to Low)</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+<!-- Review List -->
+<ul>
+    {% for review in reviews %}
+        <li>
+            {{ review.movie_title }} - {{ review.rating }}/5 by 
+            {% if review.user %}
+                {{ review.user.username }}
+            {% else %}
+                Unknown User
+            {% endif %}
+            on {{ review.created_date|date:"M. d, Y, h:i a" }}
+            <p>{{ review.review_content }}</p>
+            {% if review.user == user %}
+                <a href="{% url 'update_review' review.pk %}">Edit</a>
+                <a href="{% url 'delete_review' review.pk %}">Delete</a>
+            {% endif %}
+        </li>
+    {% empty %}
+        <li>No reviews found.</li>
+    {% endfor %}
+</ul>
+<!-- Add Review Link -->
+{% if user.is_authenticated %}
+    <a href="{% url 'create_review' %}">Add Review</a>
+{% endif %}
+{% endblock %}
