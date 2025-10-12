@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Movie Reviews</h2>
-<!-- Filter Form -->
+
 <form method="get">
     <input type="text" name="movie_title" placeholder="Search by movie title" value="{{ request.GET.movie_title }}">
     <select name="rating">
@@ -18,7 +18,7 @@
     </select>
     <button type="submit">Filter</button>
 </form>
-<!-- Review List -->
+
 <ul>
     {% for review in reviews %}
         <li>
@@ -39,7 +39,7 @@
         <li>No reviews found.</li>
     {% endfor %}
 </ul>
-<!-- Add Review Link -->
+
 {% if user.is_authenticated %}
     <a href="{% url 'create_review' %}">Add Review</a>
 {% endif %}
