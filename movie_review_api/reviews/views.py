@@ -12,15 +12,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import ReviewForm  # We'll define this later
+from .forms import ReviewForm 
 from django.contrib.auth.decorators import login_required
 
-# API ViewSets
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]  # Adjust as needed; e.g., admin-only for list
+    permission_classes = [IsAuthenticatedOrReadOnly] 
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -35,14 +35,14 @@ class ReviewViewSet(viewsets.ModelViewSet):
     permission_classes = [IsOwnerOrReadOnly]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['movie_title', 'rating']
-    search_fields = ['movie_title', '=rating']  # Exact for rating
+    search_fields = ['movie_title', '=rating']  
     ordering_fields = ['rating', 'created_date']
-    ordering = ['-created_date']  # Default sorting
+    ordering = ['-created_date']  
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-# HTML Interface Views
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
