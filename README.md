@@ -27,9 +27,6 @@ The API supports **JWT authentication**, **permissions**, **filtering**, **searc
   - Edit or delete only their own reviews
 - Unauthenticated users can only view reviews.
 
-### 🛡️ Permissions
-- **IsAuthenticatedOrReadOnly:** Anyone can read; only logged-in users can write.
-- **IsOwnerOrReadOnly:** Users can modify only their own reviews.
 
 ### 🔎 Filtering, Searching, and Sorting
 - **Filter** reviews by `movie_title` or `rating`.
@@ -46,7 +43,7 @@ The API supports **JWT authentication**, **permissions**, **filtering**, **searc
 | Layer | Technology |
 |-------|-------------|
 | **Backend Framework** | Django, Django REST Framework |
-| **Database** | SQLite (default) / PostgreSQL |
+| **Database** | SQLite (default)  |
 | **Authentication** | JWT (via `djangorestframework-simplejwt`) |
 | **Filtering** | Django Filter |
 | **Pagination** | DRF built-in pagination |
