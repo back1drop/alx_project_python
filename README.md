@@ -1,31 +1,62 @@
-Movie Review API
+# 🎬 Movie Review API
 
-A RESTful API built with Django and Django REST Framework to manage movie reviews. Users can create, read, update, and delete (CRUD) reviews, filter reviews by movie title or rating, and sort or paginate results. The API includes user authentication with JWT and permission checks to ensure users can only modify their own reviews.
+A **RESTful API** built with **Django** and **Django REST Framework (DRF)** that allows users to create, read, update, and delete movie reviews.  
+The API supports **JWT authentication**, **permissions**, **filtering**, **searching**, and **pagination** for a complete movie review management experience.
 
-Features
+---
 
+## 🚀 Features
 
+### 🎥 Review Management
+- Create, read, update, and delete (CRUD) movie reviews.  
+- Each review includes:
+  - **Movie Title**
+  - **Review Content**
+  - **Rating (1–5)**
+  - **User (owner)**
+  - **Created Date**
 
+### 👤 User Management
+- Manage users via CRUD operations.
+- Each user has a **unique username**, **email**, and **password**.
 
+### 🔐 Authentication
+- Uses **JWT (JSON Web Token)** authentication for secure API access.
+- Authenticated users can:
+  - Create reviews
+  - Edit or delete only their own reviews
+- Unauthenticated users can only view reviews.
 
-Review Management: Create, read, update, and delete movie reviews with attributes like Movie Title, Review Content, Rating (1-5), User ID, and Created Date.
+### 🛡️ Permissions
+- **IsAuthenticatedOrReadOnly:** Anyone can read; only logged-in users can write.
+- **IsOwnerOrReadOnly:** Users can modify only their own reviews.
 
+### 🔎 Filtering, Searching, and Sorting
+- **Filter** reviews by `movie_title` or `rating`.
+- **Search** reviews by title or exact rating.
+- **Order** reviews by `rating` or `created_date`.
 
+### 📄 Pagination
+- Paginated responses (default: 10 reviews per page) for better performance with large datasets.
 
-User Management: CRUD operations for users with unique Username, Email, and Password.
+---
 
+## 🧠 Tech Stack
 
+| Layer | Technology |
+|-------|-------------|
+| **Backend Framework** | Django, Django REST Framework |
+| **Database** | SQLite (default) / PostgreSQL |
+| **Authentication** | JWT (via `djangorestframework-simplejwt`) |
+| **Filtering** | Django Filter |
+| **Pagination** | DRF built-in pagination |
+| **Language** | Python 3 |
 
-Authentication: JWT-based authentication to secure endpoints.
+---
 
+## ⚙️ Installation and Setup
 
-
-Permissions: Only authenticated users can create/update/delete their own reviews; read access is open to all.
-
-
-
-Filtering & Sorting: Filter reviews by Movie Title or Rating, and sort by Rating or Date Created.
-
-
-
-Pagination: Paginated responses for large datasets (default: 10 reviews per page).
+### 1. Clone the repository
+```bash
+git clone https://github.com/yourusername/movie-review-api.git
+cd movie-review-api
